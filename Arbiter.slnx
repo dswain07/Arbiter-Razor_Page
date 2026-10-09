@@ -1,6 +1,6 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/Arbiter.Data/Arbiter.Data.csproj" />
-    <Project Path="src/Arbiter.Web/Arbiter.Web.csproj" />
-  </Folder>
+    <Folder Name="/src/">
+        <Project Path="src/Arbiter.Data/Arbiter.Data.csproj" />
+        <Project Path="src/Arbiter.Web/Arbiter.Web.csproj" />
+    </Folder>
 </Solution>
