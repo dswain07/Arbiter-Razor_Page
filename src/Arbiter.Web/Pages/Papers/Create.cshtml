@@ -1,0 +1,52 @@
+@page
+@model Arbiter.Web.Pages.Papers.CreateModel
+
+@{
+    ViewData["Title"] = "Create Paper";
+}
+
+<h1>Create Paper</h1>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label asp-for="Paper.Title" class="form-label"></label>
+        <input asp-for="Paper.Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Paper.Abstract" class="form-label"></label>
+        <textarea asp-for="Paper.Abstract" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Paper.Keywords" class="form-label"></label>
+        <input asp-for="Paper.Keywords" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Paper.SubmissionDate" class="form-label"></label>
+        <input asp-for="Paper.SubmissionDate"
+                type="date"
+                class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Paper.Status" class="form-label"></label>
+        <input asp-for="Paper.Status" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Paper.TrackId" class="form-label"></label>
+        <input asp-for="Paper.TrackId" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

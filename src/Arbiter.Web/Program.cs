@@ -28,4 +28,11 @@ app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ArbiterDbContext>();
+
+    Arbiter.Web.Data.DbInitializer.Initialize(context);
+}
+
 app.Run();
