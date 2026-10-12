@@ -18,5 +18,10 @@ public class Paper
 
     public int TrackId { get; set; }
 
-    // public Track Track { get; set; }
+    public Track? Track { get; set; }
+
+    public ICollection<Review> Reviews { get; set; } = new List<Review>();
+    
+    public ICollection<PaperAuthor> PaperAuthors { get; set; } = new List<PaperAuthor>();
+    
 }

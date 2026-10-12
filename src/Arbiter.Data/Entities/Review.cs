@@ -6,11 +6,14 @@ public class Review
 
     public int PaperId { get; set; } 
 
-    public string ReviewName { get; set; } = string.Empty;
+    public string ReviewerName { get; set; } = string.Empty;
 
     public int Score { get; set; }
 
     public string Comments { get; set; } = string.Empty; 
 
     public DateTime ReviewDate { get; set; } 
+
+    public Paper? Paper { get; set; }
+
 }

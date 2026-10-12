@@ -10,5 +10,8 @@ public class Author
 
     public string Affiliation { get; set; } = string.Empty; 
 
-    public string OrciId { get; set; } = string.Empty;
+    public string OrcidId { get; set; } = string.Empty;
+
+    public ICollection<PaperAuthor> PaperAuthors { get; set; } = new List<PaperAuthor>();
+
 }

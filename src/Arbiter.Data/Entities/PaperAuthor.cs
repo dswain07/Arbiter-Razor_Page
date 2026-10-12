@@ -11,4 +11,8 @@ public class PaperAuthor
     public int AuthorOrder { get; set; }
 
     public bool IsCorrespondingAuthor { get; set; } 
+
+    public Paper? Paper { get; set; }
+
+    public Author? Author { get; set; }
 }
