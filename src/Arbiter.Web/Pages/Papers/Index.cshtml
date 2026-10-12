@@ -29,7 +29,11 @@
     {
         <tr>
 
-            <td>@item.Title</td>
+            <td><a asp-page="Details"
+                    asp-route-id="@item.Id">
+                    @item.Title
+                </a>
+            </td>
 
             <td>@item.Status</td>
 
