@@ -1,0 +1,32 @@
+@page "{id:int}"
+@model Arbiter.Web.Pages.Authors.DetailsModel
+
+<h1>Author Details</h1>
+
+<table class="table">
+
+    <tr>
+        <th>Full Name</th>
+        <td>@Model.Author?.FullName</td>
+    </tr>
+
+    <tr>
+        <th>Email</th>
+        <td>@Model.Author?.Email</td>
+    </tr>
+
+    <tr>
+        <th>Affiliation</th>
+        <td>@Model.Author?.Affiliation</td>
+    </tr>
+
+    <tr>
+        <th>OrcidId</th>
+        <td>@Model.Author?.OrcidId</td>
+    </tr>
+
+</table>
+
+<a asp-page="Index" class="btn btn-secondary">
+    Back
+</a>

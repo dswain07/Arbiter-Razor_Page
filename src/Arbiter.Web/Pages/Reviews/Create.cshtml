@@ -1,0 +1,40 @@
+@page
+@model Arbiter.Web.Pages.Reviews.CreateModel
+
+@{
+    ViewData["Title"] = "Create Review";
+}
+
+<h1>Create Review</h1>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label asp-for="Review.ReviewerName" class="form-label"></label>
+        <input asp-for="Review.ReviewerName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Review.Score" class="form-label"></label>
+        <input asp-for="Review.Score" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Review.Comments" class="form-label"></label>
+        <input asp-for="Review.Comments" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Review.ReviewDate" class="form-label"></label>
+        <input asp-for="Review.ReviewDate" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

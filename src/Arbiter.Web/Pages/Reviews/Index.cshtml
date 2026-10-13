@@ -1,0 +1,70 @@
+@page
+@model Arbiter.Web.Pages.Reviews.IndexModel
+
+<h1>Reviews</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New Review</a>
+</p>
+
+<table class="table table-striped">
+
+    <thead>
+
+        <tr>
+
+            <th>Reviewer Name</th>
+
+            <th>Score</th>
+
+            <th>Comments</th>
+
+            <th>Review Date</th>
+            
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    @foreach (var item in Model.Reviews)
+{
+    <tr>
+
+        <td>
+            @item.ReviewerName
+        </td>
+
+        <td>
+            @item.Score
+        </td>
+
+        <td>
+            @item.Comments
+        </td>
+
+        <td>
+            @item.ReviewDate
+        </td>
+
+        <td>
+                <a asp-page="Edit"
+                    asp-route-id="@item.Id"
+                    class="btn btn-sm btn-warning">
+                    Edit
+                </a>
+
+                <a asp-page="Delete"
+                    asp-route-id="@item.Id"
+                    class="btn btn-sm btn-danger">
+                    Delete
+                </a>
+            </td>
+
+    </tr>
+}
+
+    </tbody>
+
+</table>
