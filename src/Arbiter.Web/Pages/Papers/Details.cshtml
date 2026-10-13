@@ -1,9 +1,18 @@
+
 @page "{id:int}"
 @model Arbiter.Web.Pages.Papers.DetailsModel
 
+@{
+    ViewData["Title"] = "Paper Details";
+}
+
 <h1>Paper Details</h1>
 
-<table class="table">
+<table class="table table-bordered">
+    <tr>
+        <th>Paper ID</th>
+        <td>@Model.Paper?.Id</td>
+    </tr>
 
     <tr>
         <th>Title</th>
@@ -16,6 +25,11 @@
     </tr>
 
     <tr>
+        <th>Keywords</th>
+        <td>@Model.Paper?.Keywords</td>
+    </tr>
+
+    <tr>
         <th>Status</th>
         <td>@Model.Paper?.Status</td>
     </tr>
@@ -25,8 +39,27 @@
         <td>@Model.Paper?.Track?.Name</td>
     </tr>
 
+    <tr>
+        <th>Submission Date</th>
+        <td>@Model.Paper?.SubmissionDate.ToShortDateString()</td>
+    </tr>
+
+    <tr>
+        <th>Last Modified</th>
+        <td>
+            @(Model.Paper?.LastModifiedDate?.ToShortDateString()
+                ?? "Not Modified")
+        </td>
+    </tr>
 </table>
 
-<a asp-page="Index" class="btn btn-secondary">
+<a asp-page="Edit"
+    asp-route-id="@Model.Paper?.Id"
+    class="btn btn-warning">
+    Edit
+</a>
+
+<a asp-page="Index"
+    class="btn btn-secondary">
     Back
 </a>

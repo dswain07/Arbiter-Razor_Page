@@ -1,5 +1,10 @@
+
 @page "{id:int}"
 @model Arbiter.Web.Pages.Papers.EditModel
+
+@{
+    ViewData["Title"] = "Edit Paper";
+}
 
 <h1>Edit Paper</h1>
 
@@ -7,37 +12,79 @@
 
     <input type="hidden" asp-for="Paper.Id" />
 
+    <div asp-validation-summary="ModelOnly"
+            class="text-danger"></div>
+
     <div class="mb-3">
-        <label asp-for="Paper.Title"></label>
-        <input asp-for="Paper.Title" class="form-control" />
+        <label asp-for="Paper.Title"
+                class="form-label"></label>
+
+        <input asp-for="Paper.Title"
+                class="form-control" />
+
+        <span asp-validation-for="Paper.Title"
+                class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Paper.Abstract"></label>
-        <textarea asp-for="Paper.Abstract" class="form-control"></textarea>
+        <label asp-for="Paper.Abstract"
+                class="form-label"></label>
+
+        <textarea asp-for="Paper.Abstract"
+                    class="form-control"
+                    rows="5"></textarea>
+
+        <span asp-validation-for="Paper.Abstract"
+                class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Paper.Keywords"></label>
-        <input asp-for="Paper.Keywords" class="form-control" />
+        <label asp-for="Paper.Keywords"
+                class="form-label"></label>
+
+        <input asp-for="Paper.Keywords"
+                class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label asp-for="Paper.Status"></label>
-        <input asp-for="Paper.Status" class="form-control" />
+        <label asp-for="Paper.Status"
+                class="form-label"></label>
+
+        <input asp-for="Paper.Status"
+                class="form-control" />
+
+        <span asp-validation-for="Paper.Status"
+                class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Paper.TrackId"></label>
-        <input asp-for="Paper.TrackId" class="form-control" />
+        <label asp-for="Paper.TrackId"
+                class="form-label"></label>
+
+        <select asp-for="Paper.TrackId"
+                asp-items="Model.TrackList"
+                class="form-select">
+
+            <option value="0">-- Select Track --</option>
+
+        </select>
+
+        <span asp-validation-for="Paper.TrackId"
+                class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">
+    <button type="submit"
+            class="btn btn-primary">
         Save Changes
     </button>
 
-    <a asp-page="Index" class="btn btn-secondary">
+    <a asp-page="Index"
+        class="btn btn-secondary">
         Cancel
     </a>
 
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

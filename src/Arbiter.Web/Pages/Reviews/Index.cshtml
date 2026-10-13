@@ -12,6 +12,7 @@
     <thead>
 
         <tr>
+            <th>Paper</th>
 
             <th>Reviewer Name</th>
 
@@ -20,6 +21,8 @@
             <th>Comments</th>
 
             <th>Review Date</th>
+
+            <th>Actions</th>
             
 
         </tr>
@@ -31,6 +34,9 @@
     @foreach (var item in Model.Reviews)
 {
     <tr>
+        <td>
+            @item.Paper?.Title
+        </td>
 
         <td>
             @item.ReviewerName
@@ -45,10 +51,16 @@
         </td>
 
         <td>
-            @item.ReviewDate
+            @item.ReviewDate.ToShortDateString()
         </td>
 
         <td>
+                <a asp-page="Details"
+                    asp-route-id="@item.Id"
+                    class="btn btn-sm btn-warning">
+                    Details
+                </a>
+
                 <a asp-page="Edit"
                     asp-route-id="@item.Id"
                     class="btn btn-sm btn-warning">

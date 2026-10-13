@@ -1,7 +1,9 @@
+
 using Arbiter.Data.Context;
 using Arbiter.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Arbiter.Web.Pages.Reviews;
 
@@ -22,7 +24,9 @@ public class DeleteModel : PageModel
         if (id == null)
             return NotFound();
 
-        var review = await _context.Reviews.FindAsync(id);
+        var review = await _context.Reviews
+            .Include(r => r.Paper)
+            .FirstOrDefaultAsync(r => r.Id == id);
 
         if (review == null)
             return NotFound();
@@ -39,11 +43,12 @@ public class DeleteModel : PageModel
 
         var review = await _context.Reviews.FindAsync(id);
 
-        if (review != null)
-        {
-            _context.Reviews.Remove(review);
-            await _context.SaveChangesAsync();
-        }
+        if (review == null)
+            return NotFound();
+
+        _context.Reviews.Remove(review);
+
+        await _context.SaveChangesAsync();
 
         return RedirectToPage("./Index");
     }

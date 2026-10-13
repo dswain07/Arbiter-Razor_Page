@@ -1,3 +1,4 @@
+
 @page
 @model Arbiter.Web.Pages.Reviews.CreateModel
 
@@ -9,32 +10,85 @@
 
 <form method="post">
 
+    <div asp-validation-summary="ModelOnly"
+            class="text-danger"></div>
+
     <div class="mb-3">
-        <label asp-for="Review.ReviewerName" class="form-label"></label>
-        <input asp-for="Review.ReviewerName" class="form-control" />
+        <label asp-for="Review.PaperId"
+                class="form-label">
+                Paper
+        </label>
+
+        <select asp-for="Review.PaperId"
+                asp-items="Model.PaperList"
+                class="form-select">
+
+            <option value="0">-- Select Paper --</option>
+
+        </select>
+
+        <span asp-validation-for="Review.PaperId"
+                class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Review.Score" class="form-label"></label>
-        <input asp-for="Review.Score" class="form-control" />
+        <label asp-for="Review.ReviewerName"
+                class="form-label"></label>
+
+        <input asp-for="Review.ReviewerName"
+                class="form-control" />
+
+        <span asp-validation-for="Review.ReviewerName"
+                class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Review.Comments" class="form-label"></label>
-        <input asp-for="Review.Comments" class="form-control" />
+        <label asp-for="Review.Score"
+                class="form-label"></label>
+
+        <input asp-for="Review.Score"
+                type="number"
+                min="1"
+                max="5"
+                class="form-control" />
+
+        <span asp-validation-for="Review.Score"
+                class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Review.ReviewDate" class="form-label"></label>
-        <input asp-for="Review.ReviewDate" class="form-control" />
+        <label asp-for="Review.Comments"
+                class="form-label"></label>
+
+        <textarea asp-for="Review.Comments"
+                    class="form-control"
+                    rows="4"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary">
-        Save
+    <div class="mb-3">
+        <label asp-for="Review.ReviewDate"
+                class="form-label"></label>
+
+        <input asp-for="Review.ReviewDate"
+                type="date"
+                class="form-control" />
+
+        <span asp-validation-for="Review.ReviewDate"
+                class="text-danger"></span>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Save Review
     </button>
 
-    <a asp-page="Index" class="btn btn-secondary">
+    <a asp-page="Index"
+        class="btn btn-secondary">
         Cancel
     </a>
 
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

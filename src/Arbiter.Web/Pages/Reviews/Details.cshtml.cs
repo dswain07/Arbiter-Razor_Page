@@ -1,3 +1,4 @@
+
 using Arbiter.Data.Context;
 using Arbiter.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,8 @@ public class DetailsModel : PageModel
             return NotFound();
 
         Review = await _context.Reviews
-            .FirstOrDefaultAsync(a => a.Id == id);
+            .Include(r => r.Paper)
+            .FirstOrDefaultAsync(r => r.Id == id);
 
         if (Review == null)
             return NotFound();

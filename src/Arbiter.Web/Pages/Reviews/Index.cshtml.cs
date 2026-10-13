@@ -18,6 +18,8 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        Reviews = await _context.Reviews.ToListAsync();
+        Reviews = await _context.Reviews
+            .Include(r => r.Paper)
+            .ToListAsync();
     }
 }

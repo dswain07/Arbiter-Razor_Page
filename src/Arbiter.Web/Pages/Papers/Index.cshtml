@@ -1,62 +1,76 @@
+
 @page
 @model Arbiter.Web.Pages.Papers.IndexModel
+
+@{
+    ViewData["Title"] = "Papers";
+}
 
 <h1>Papers</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-primary">Create New Paper</a>
+    <a asp-page="Create" class="btn btn-primary">
+        Create New Paper
+    </a>
 </p>
 
 <table class="table table-striped">
 
     <thead>
-
         <tr>
-
             <th>Title</th>
-
             <th>Status</th>
-
             <th>Track</th>
+            <th>Submission Date</th>
+            <th>Last Modified</th>
             <th>Actions</th>
-
         </tr>
-
     </thead>
 
     <tbody>
+        @foreach (var item in Model.Papers)
+        {
+            <tr>
+                <td>
+                    <a asp-page="Details"
+                        asp-route-id="@item.Id">
+                        @item.Title
+                    </a>
+                </td>
 
-    @foreach (var item in Model.Papers)
-    {
-        <tr>
+                <td>@item.Status</td>
 
-            <td><a asp-page="Details"
-                    asp-route-id="@item.Id">
-                    @item.Title
-                </a>
-            </td>
+                <td>@item.Track?.Name</td>
 
-            <td>@item.Status</td>
+                <td>
+                    @item.SubmissionDate.ToShortDateString()
+                </td>
 
-            <td>@item.Track?.Name</td>
+                <td>
+                    @(item.LastModifiedDate?.ToShortDateString() ?? "Not Modified")
+                </td>
 
-            <td>
-                <a asp-page="Edit"
-                    asp-route-id="@item.Id"
-                    class="btn btn-sm btn-warning">
-                    Edit
-                </a>
+                <td>
+                    <a asp-page="Details"
+                        asp-route-id="@item.Id"
+                        class="btn btn-sm btn-info">
+                        Details
+                    </a>
 
-                <a asp-page="Delete"
-                    asp-route-id="@item.Id"
-                    class="btn btn-sm btn-danger">
-                    Delete
-                </a>
-            </td>
+                    <a asp-page="Edit"
+                        asp-route-id="@item.Id"
+                        class="btn btn-sm btn-warning">
+                        Edit
+                    </a>
 
-        </tr>
-    }
-
+                    <a asp-page="Delete"
+                        asp-route-id="@item.Id"
+                        class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 
 </table>
