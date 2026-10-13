@@ -18,6 +18,7 @@
             <th>Status</th>
 
             <th>Track</th>
+            <th>Actions</th>
 
         </tr>
 
@@ -38,6 +39,20 @@
             <td>@item.Status</td>
 
             <td>@item.Track?.Name</td>
+
+            <td>
+                <a asp-page="Edit"
+                    asp-route-id="@item.Id"
+                    class="btn btn-sm btn-warning">
+                    Edit
+                </a>
+
+                <a asp-page="Delete"
+                    asp-route-id="@item.Id"
+                    class="btn btn-sm btn-danger">
+                    Delete
+                </a>
+            </td>
 
         </tr>
     }

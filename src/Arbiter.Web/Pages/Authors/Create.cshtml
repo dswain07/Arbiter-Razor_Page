@@ -1,0 +1,42 @@
+@page
+@model Arbiter.Web.Pages.Authors.CreateModel
+
+@{
+    ViewData["Title"] = "Create Author";
+}
+
+<h1>Create Author</h1>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label asp-for="Author.FullName" class="form-label"></label>
+        <input asp-for="Author.FullName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Author.Email" class="form-label"></label>
+        <input asp-for="Author.Email"
+                type="email"
+                class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Author.Affiliation" class="form-label"></label>
+        <input asp-for="Author.Affiliation" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Author.OrcidId" class="form-label"></label>
+        <input asp-for="Author.OrcidId" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
