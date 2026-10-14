@@ -3,7 +3,7 @@ using Arbiter.Data.Entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Arbiter.Web.Pages.Authorss;
+namespace Arbiter.Web.Pages.Authors;
 
 public class IndexModel : PageModel
 {

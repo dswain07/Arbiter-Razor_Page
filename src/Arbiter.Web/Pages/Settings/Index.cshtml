@@ -1,0 +1,73 @@
+@page
+@model Arbiter.Web.Pages.Settings.IndexModel
+
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<h1>Settings</h1>
+
+<p class="text-body-secondary">
+    Customize your Arbiter application preferences.
+</p>
+
+<div class="card mb-4">
+    <div class="card-body">
+
+        <h4 class="card-title">Appearance</h4>
+
+        <p class="text-body-secondary">
+            Choose your preferred application theme.
+        </p>
+
+        <div class="mb-3">
+            <label for="themeSelect" class="form-label">
+                Application Theme
+            </label>
+
+            <select id="themeSelect"
+                    class="form-select">
+
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+
+            </select>
+        </div>
+
+        <p class="small text-body-secondary">
+            Your theme preference is saved automatically.
+        </p>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const themeSelect =
+                document.getElementById("themeSelect");
+
+            const savedTheme =
+                localStorage.getItem("arbiter-theme") || "light";
+
+            themeSelect.value = savedTheme;
+
+            themeSelect.addEventListener("change", function () {
+
+                const selectedTheme = themeSelect.value;
+
+                document.documentElement.setAttribute(
+                    "data-bs-theme",
+                    selectedTheme
+                );
+
+                localStorage.setItem(
+                    "arbiter-theme",
+                    selectedTheme
+                );
+
+            });
+        });
+    </script>
+}

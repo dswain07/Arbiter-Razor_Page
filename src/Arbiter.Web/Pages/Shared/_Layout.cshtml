@@ -1,36 +1,153 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Arbiter.Web</title>
+    <meta name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Arbiter</title>
+
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Arbiter.Web.styles.css" asp-append-version="true" />
+
+    <!-- Load saved theme before displaying the page -->
+    <script>
+        (function () {
+            const savedTheme =
+                localStorage.getItem("arbiter-theme") || "light";
+
+            document.documentElement.setAttribute(
+                "data-bs-theme",
+                savedTheme
+            );
+        })();
+    </script>
+
+    <link rel="stylesheet"
+            href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+            href="~/css/site.css"
+            asp-append-version="true" />
+
+    <link rel="stylesheet"
+            href="~/Arbiter.Web.styles.css"
+            asp-append-version="true" />
 </head>
+
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg
+                    bg-body-tertiary border-bottom
+                    shadow-sm mb-4">
+
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Arbiter.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <a class="navbar-brand fw-bold"
+                    asp-page="/Index">
+                    Arbiter
+                </a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse"
+                        id="mainNavbar">
+
+                    <ul class="navbar-nav me-auto">
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link"
+                                asp-page="/Index">
+                                Home
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link"
+                                asp-page="/Papers/Index">
+                                Papers
+                            </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                asp-page="/Authors/Index">
+                                Authors
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                asp-page="/Reviews/Index">
+                                Reviews
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                asp-page="/Admin/Tracks/Index">
+                                Administration
+                            </a>
+                        </li>
+
                     </ul>
+
+                    
+                    <ul class="navbar-nav align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                asp-page="/Settings/Index">
+                                Settings
+                            </a>
+                        </li>
+
+                        @if (User.Identity?.IsAuthenticated == true &&
+                            User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item ms-lg-2">
+                                <span class="navbar-text">
+                                    Administrator
+                                </span>
+                            </li>
+
+                            <li class="nav-item ms-lg-2">
+                                
+                                <a asp-page="/AdminLogout"
+                                    class="btn btn-outline-danger btn-sm">
+                                    Logout
+                                </a>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-lg-2">
+                                <a asp-page="/AdminLogin"
+                                    class="btn btn-outline-primary btn-sm">
+                                    Admin Login
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -39,14 +156,19 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2026 - Arbiter.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2026 - Arbiter Research Conference
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
