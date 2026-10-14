@@ -1,10 +1,218 @@
-﻿@page
+﻿
+@page
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Welcome Banner -->
+<section class="arbiter-hero rounded-4 p-4 p-md-5 mb-5">
+
+    <div class="row align-items-center">
+
+        <div class="col-lg-9">
+
+            <p class="text-uppercase fw-semibold mb-3"
+                style="letter-spacing: 2px;">
+                University Research Publication & Peer Review Hub
+            </p>
+
+            <h1 class="display-4 fw-bold mb-3">
+                Welcome to Arbiter
+            </h1>
+
+            <h2 class="h4 mb-4">
+                Advancing Research. Connecting Scholars.
+            </h2>
+
+            <p class="lead mb-4">
+                Arbiter is a University of South Carolina inspired
+                research platform designed to simplify academic
+                paper submissions, connect researchers, and
+                support scholarly peer review.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a asp-page="/Papers/Index"
+                    class="btn btn-light btn-lg">
+                    Explore Research
+                </a>
+
+                <a asp-page="/Papers/Create"
+                    class="btn btn-outline-light btn-lg">
+                    Submit a Paper
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- About Arbiter -->
+<section class="mb-5">
+
+    <h2 class="fw-bold mb-3">
+        About Arbiter
+    </h2>
+
+    <p class="fs-5 text-body-secondary">
+        Arbiter provides a centralized platform for managing
+        university research publications and the peer-review
+        process. It allows researchers to organize submissions,
+        explore scholarly work, manage author information,
+        and evaluate research across different academic areas.
+    </p>
+
+    <p class="text-body-secondary">
+        Developed as an independent academic project,
+        Arbiter draws inspiration from the University of
+        South Carolina's research community.
+    </p>
+
+</section>
+
+
+<!-- Arbiter Features -->
+<section class="mb-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">
+            What Can You Do With Arbiter?
+        </h2>
+
+        <p class="text-body-secondary">
+            Explore research, manage submissions,
+            connect with authors, and support peer review.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Discover Research -->
+        <div class="col-md-6">
+
+            <div class="card arbiter-feature-card h-100">
+                <div class="card-body p-4">
+
+                    <div class="arbiter-feature-icon mb-3">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <h3 class="h5 fw-bold">
+                        Discover Research
+                    </h3>
+
+                    <p class="text-body-secondary">
+                        Browse academic papers, search by
+                        research topics, and explore submissions
+                        across different research tracks.
+                    </p>
+
+                    <a asp-page="/Papers/Index"
+                        class="btn btn-outline-primary">
+                        Browse Papers
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submit Papers -->
+        <div class="col-md-6">
+
+            <div class="card arbiter-feature-card h-100">
+                <div class="card-body p-4">
+
+                    <div class="arbiter-feature-icon mb-3">
+                        <i class="bi bi-file-earmark-plus"></i>
+                    </div>
+
+                    <h3 class="h5 fw-bold">
+                        Submit Papers
+                    </h3>
+
+                    <p class="text-body-secondary">
+                        Submit new research papers, select
+                        academic research tracks, and manage
+                        existing submissions.
+                    </p>
+
+                    <a asp-page="/Papers/Create"
+                        class="btn btn-outline-primary">
+                        Submit Research
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Explore Authors -->
+        <div class="col-md-6">
+
+            <div class="card arbiter-feature-card h-100">
+                <div class="card-body p-4">
+
+                    <div class="arbiter-feature-icon mb-3">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h3 class="h5 fw-bold">
+                        Explore Authors
+                    </h3>
+
+                    <p class="text-body-secondary">
+                        Discover researchers, explore their
+                        academic affiliations, and manage
+                        author information.
+                    </p>
+
+                    <a asp-page="/Authors/Index"
+                        class="btn btn-outline-primary">
+                        View Authors
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Peer Review -->
+        <div class="col-md-6">
+
+            <div class="card arbiter-feature-card h-100">
+                <div class="card-body p-4">
+
+                    <div class="arbiter-feature-icon mb-3">
+                        <i class="bi bi-clipboard-check"></i>
+                    </div>
+
+                    <h3 class="h5 fw-bold">
+                        Peer Review
+                    </h3>
+
+                    <p class="text-body-secondary">
+                        Access research evaluations, review
+                        feedback, and manage peer-review
+                        records for submitted papers.
+                    </p>
+
+                    <a asp-page="/Reviews/Index"
+                        class="btn btn-outline-primary">
+                        Explore Reviews
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

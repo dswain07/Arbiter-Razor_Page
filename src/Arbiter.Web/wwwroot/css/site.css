@@ -29,3 +29,202 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+
+/* Arbiter Homepage */
+
+.arbiter-hero {
+    background: linear-gradient(
+        135deg,
+        #73000A 0%,
+        #520008 100%
+    );
+
+    color: #ffffff;
+}
+
+.arbiter-hero .lead {
+    color: #f5e7e9;
+    max-width: 850px;
+}
+
+.arbiter-hero .btn-light {
+    color: #73000A;
+    font-weight: 600;
+}
+
+.arbiter-hero .btn-outline-light:hover {
+    color: #73000A;
+}
+
+/* Responsive heading */
+@media (max-width: 768px) {
+    .arbiter-hero h1 {
+        font-size: 2.3rem;
+    }
+}
+
+
+/* Arbiter Feature Cards */
+
+.arbiter-feature-card {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 14px;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.arbiter-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+
+.arbiter-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+
+    background-color: rgba(115, 0, 10, 0.08);
+    color: #73000A;
+
+    border-radius: 14px;
+    font-size: 1.8rem;
+}
+
+[data-bs-theme="dark"] .arbiter-feature-icon {
+    background-color: rgba(255, 179, 188, 0.12);
+    color: #ffb3bc;
+}
+
+
+/* Garnet button styling */
+
+.arbiter-feature-card .btn-outline-primary {
+    color: #73000A;
+    border-color: #73000A;
+}
+
+.arbiter-feature-card .btn-outline-primary:hover {
+    background-color: #73000A;
+    border-color: #73000A;
+    color: #ffffff;
+}
+
+/* Dark mode support */
+
+[data-bs-theme="dark"] .arbiter-feature-icon {
+    color: #ffb3bc;
+}
+
+[data-bs-theme="dark"]
+.arbiter-feature-card .btn-outline-primary {
+    color: #ffb3bc;
+    border-color: #ffb3bc;
+}
+
+[data-bs-theme="dark"]
+.arbiter-feature-card .btn-outline-primary:hover {
+    background-color: #ffb3bc;
+    color: #212529;
+}
+
+
+/* =====================================
+   Arbiter - University Inspired Theme
+   ===================================== */
+
+/* Light Mode */
+[data-bs-theme="light"] {
+    --bs-primary: #73000A;
+    --bs-primary-rgb: 115, 0, 10;
+    --arbiter-primary: #73000A;
+    --arbiter-link: #73000A;
+}
+
+/* Dark Mode */
+[data-bs-theme="dark"] {
+    --bs-primary: #E6A0A8;
+    --bs-primary-rgb: 230, 160, 168;
+    --arbiter-primary: #E6A0A8;
+    --arbiter-link: #FFB3BC;
+}
+
+/* Navbar Branding */
+.navbar-brand {
+    color: var(--arbiter-primary);
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: var(--arbiter-primary);
+}
+
+/* Navigation Links */
+.navbar .nav-link:hover {
+    color: var(--arbiter-link);
+}
+
+/* Primary Buttons */
+.btn-primary {
+    --bs-btn-bg: #73000A;
+    --bs-btn-border-color: #73000A;
+    --bs-btn-hover-bg: #590008;
+    --bs-btn-hover-border-color: #590008;
+    --bs-btn-active-bg: #490006;
+    --bs-btn-active-border-color: #490006;
+    --bs-btn-color: #ffffff;
+    --bs-btn-hover-color: #ffffff;
+}
+
+/* Outline Primary Buttons */
+.btn-outline-primary {
+    --bs-btn-color: var(--arbiter-primary);
+    --bs-btn-border-color: var(--arbiter-primary);
+    --bs-btn-hover-bg: #73000A;
+    --bs-btn-hover-border-color: #73000A;
+    --bs-btn-hover-color: #ffffff;
+}
+
+/* Links */
+main a:not(.btn) {
+    color: var(--arbiter-link);
+}
+
+main a:not(.btn):hover {
+    text-decoration: underline;
+}
+
+/* Form Focus */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--arbiter-primary);
+    box-shadow: 0 0 0 0.2rem rgba(115, 0, 10, 0.15);
+}
+
+/* Table Headings */
+.table thead th {
+    font-weight: 600;
+    border-bottom: 2px solid var(--arbiter-primary);
+}
+
+/* Dark Mode Button Adjustments */
+[data-bs-theme="dark"] .btn-primary {
+    --bs-btn-bg: #A63A47;
+    --bs-btn-border-color: #A63A47;
+    --bs-btn-hover-bg: #BF4C59;
+    --bs-btn-hover-border-color: #BF4C59;
+    --bs-btn-color: #ffffff;
+    --bs-btn-hover-color: #ffffff;
+}
+
+[data-bs-theme="dark"] .btn-outline-primary {
+    --bs-btn-color: #FFB3BC;
+    --bs-btn-border-color: #FFB3BC;
+    --bs-btn-hover-bg: #A63A47;
+    --bs-btn-hover-border-color: #A63A47;
+    --bs-btn-hover-color: #ffffff;
+}
