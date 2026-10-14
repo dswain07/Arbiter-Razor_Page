@@ -7,76 +7,82 @@
     <a asp-page="Create" class="btn btn-primary">Create New Review</a>
 </p>
 
-<table class="table table-striped">
+<div class="table-responsive">
+    <table class="table table-striped">
 
-    <thead>
+        <thead>
 
+            <tr>
+                <th>Paper</th>
+
+                <th class="text-nowrap">Reviewer Name</th>
+
+                <th>Score</th>
+
+                <th>Comments</th>
+
+                <th class="text-nowrap">Review Date</th>
+
+                <th>Actions</th>
+                
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        @foreach (var item in Model.Reviews)
+    {
         <tr>
-            <th>Paper</th>
-
-            <th>Reviewer Name</th>
-
-            <th>Score</th>
-
-            <th>Comments</th>
-
-            <th>Review Date</th>
-
-            <th>Actions</th>
-            
-
-        </tr>
-
-    </thead>
-
-    <tbody>
-
-    @foreach (var item in Model.Reviews)
-{
-    <tr>
-        <td>
-            @item.Paper?.Title
-        </td>
-
-        <td>
-            @item.ReviewerName
-        </td>
-
-        <td>
-            @item.Score
-        </td>
-
-        <td>
-            @item.Comments
-        </td>
-
-        <td>
-            @item.ReviewDate.ToShortDateString()
-        </td>
-
-        <td>
-                <a asp-page="Details"
-                    asp-route-id="@item.Id"
-                    class="btn btn-sm btn-warning">
-                    Details
-                </a>
-
-                <a asp-page="Edit"
-                    asp-route-id="@item.Id"
-                    class="btn btn-sm btn-warning">
-                    Edit
-                </a>
-
-                <a asp-page="Delete"
-                    asp-route-id="@item.Id"
-                    class="btn btn-sm btn-danger">
-                    Delete
-                </a>
+            <td>
+                @item.Paper?.Title
             </td>
 
-    </tr>
-}
+            <td class="text-nowrap">@item.ReviewerName</td>
 
-    </tbody>
+            <td>
+                @item.Score
+            </td>
 
-</table>
+            <td>
+                @item.Comments
+            </td>
+
+            <td class="text-nowrap">
+                @item.ReviewDate.ToShortDateString()
+            </td>
+
+            
+            <td>
+                <div class="d-flex flex-nowrap gap-1">
+
+                    <a asp-page="Details"
+                        asp-route-id="@item.Id"
+                        class="btn btn-sm btn-info">
+                        Details
+                    </a>
+
+                    <a asp-page="Edit"
+                        asp-route-id="@item.Id"
+                        class="btn btn-sm btn-warning">
+                        Edit
+                    </a>
+
+                    <a asp-page="Delete"
+                        asp-route-id="@item.Id"
+                        class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+
+                </div>
+            </td>
+
+
+        </tr>
+    }
+
+        </tbody>
+
+    </table>
+</div>

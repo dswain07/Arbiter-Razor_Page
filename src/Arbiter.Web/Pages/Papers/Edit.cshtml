@@ -46,6 +46,20 @@
                 class="form-control" />
     </div>
 
+
+    <div class="mb-3">
+        <label asp-for="Paper.SubmissionDate"
+            class="form-label"></label>
+
+        <input asp-for="Paper.SubmissionDate"
+            type="date"
+            class="form-control" />
+
+        <span asp-validation-for="Paper.SubmissionDate"
+            class="text-danger"></span>
+    </div>
+
+
     <div class="mb-3">
         <label asp-for="Paper.Status"
                 class="form-label"></label>

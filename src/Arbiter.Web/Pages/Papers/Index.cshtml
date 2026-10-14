@@ -1,4 +1,5 @@
 
+
 @page
 @model Arbiter.Web.Pages.Papers.IndexModel
 
@@ -14,63 +15,176 @@
     </a>
 </p>
 
-<table class="table table-striped">
+<!-- Search and Filter Form -->
+<form method="get" class="row g-3 mb-4">
 
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Track</th>
-            <th>Submission Date</th>
-            <th>Last Modified</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+    <div class="col-md-5">
+        <label for="SearchTerm" class="form-label">
+            Search Papers
+        </label>
 
-    <tbody>
-        @foreach (var item in Model.Papers)
-        {
+        <input type="text"
+                id="SearchTerm"
+                name="SearchTerm"
+                value="@Model.SearchTerm"
+                class="form-control"
+                placeholder="Enter search term..." />
+    </div>
+
+    <div class="col-md-3">
+        <label for="SearchType" class="form-label">
+            Search By
+        </label>
+
+        <select asp-for="SearchType"
+                class="form-select">
+
+            <option value="All">All Fields</option>
+            <option value="Id">Paper ID</option>
+            <option value="Title">Title</option>
+            <option value="Abstract">Abstract</option>
+            <option value="Keywords">Keywords</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label for="SelectedStatus" class="form-label">
+            Status
+        </label>
+
+        <select asp-for="SelectedStatus"
+                class="form-select">
+
+            <option value="">All Statuses</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-5">
+        <label for="SelectedTrackId" class="form-label">
+            Track
+        </label>
+
+        <select asp-for="SelectedTrackId"
+                asp-items="Model.TrackList"
+                class="form-select">
+
+            <option value="">All Tracks</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-7 d-flex align-items-end gap-2">
+
+        <button type="submit"
+                class="btn btn-primary">
+            Search
+        </button>
+
+        <a asp-page="Index"
+            class="btn btn-secondary">
+            Clear Filters
+        </a>
+
+    </div>
+
+</form>
+
+<hr />
+
+<h3>Search Results</h3>
+
+<p>
+    <strong>@Model.Papers.Count</strong> paper(s) found.
+</p>
+
+<div class="table-responsive">
+
+    <table class="table table-striped table-hover">
+
+        <thead>
             <tr>
-                <td>
-                    <a asp-page="Details"
-                        asp-route-id="@item.Id">
-                        @item.Title
-                    </a>
-                </td>
-
-                <td>@item.Status</td>
-
-                <td>@item.Track?.Name</td>
-
-                <td>
-                    @item.SubmissionDate.ToShortDateString()
-                </td>
-
-                <td>
-                    @(item.LastModifiedDate?.ToShortDateString() ?? "Not Modified")
-                </td>
-
-                <td>
-                    <a asp-page="Details"
-                        asp-route-id="@item.Id"
-                        class="btn btn-sm btn-info">
-                        Details
-                    </a>
-
-                    <a asp-page="Edit"
-                        asp-route-id="@item.Id"
-                        class="btn btn-sm btn-warning">
-                        Edit
-                    </a>
-
-                    <a asp-page="Delete"
-                        asp-route-id="@item.Id"
-                        class="btn btn-sm btn-danger">
-                        Delete
-                    </a>
-                </td>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Track</th>
+                <th>Submission Date</th>
+                <th>Last Modified</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
+        </thead>
 
-</table>
+        <tbody>
+
+            @if (!Model.Papers.Any())
+            {
+                <tr>
+                    <td colspan="7" class="text-center">
+                        No papers found matching your criteria.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Papers)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+
+                        <td>
+                            <a asp-page="Details"
+                                asp-route-id="@item.Id">
+                                @item.Title
+                            </a>
+                        </td>
+
+                        <td>@item.Status</td>
+
+                        <td>@item.Track?.Name</td>
+
+                        <td>
+                            @item.SubmissionDate.ToShortDateString()
+                        </td>
+
+                        <td>
+                            @(item.LastModifiedDate?.ToShortDateString()
+                                ?? "Not Modified")
+                        </td>
+
+                        <td>
+                            <div class="d-flex gap-1">
+
+                                <a asp-page="Details"
+                                    asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-info">
+                                    Details
+                                </a>
+
+                                <a asp-page="Edit"
+                                    asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-warning">
+                                    Edit
+                                </a>
+
+                                <a asp-page="Delete"
+                                    asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-danger">
+                                    Delete
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
