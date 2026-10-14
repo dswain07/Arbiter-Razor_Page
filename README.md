@@ -6,8 +6,6 @@
 
 Arbiter is an ASP.NET Core Razor Pages web application for organizing university research submissions, discovering scholarly work, maintaining author records, and managing peer reviews. Built as an independent graduate-level project for **CSCE 547 — Windows Programming**, it takes visual inspiration from the University of South Carolina through a garnet-accented, light/dark interface.
 
-> **Academic project disclaimer:** Arbiter is a student-developed demonstration application. It is not an official University of South Carolina service, publication repository, or endorsed platform. The included researchers, papers, and reviews are synthetic demonstration data.
-
 ## Features
 
 #### 1. Research Paper Management (CRUD)
@@ -274,7 +272,7 @@ Arbiter demonstrates a functional academic research workflow, but it is not yet 
 
 Developed for **CSCE 547 — Windows Programming**, Minor Project 3 (graduate-level requirements), using ASP.NET Core Razor Pages and a separate data class library.
 
-**Arbiter is an independent educational project inspired by the University of South Carolina research community; it is not affiliated with or endorsed by the university.**
+**Arbiter is an independent educational project inspired by the University of South Carolina research community.**
 
 
 ## Author
