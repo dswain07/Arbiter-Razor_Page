@@ -10,14 +10,71 @@ Arbiter is an ASP.NET Core Razor Pages web application for organizing university
 
 ## Features
 
-- **Research papers:** Create, view, edit, and delete submissions; manage titles, abstracts, keywords, status, submission dates, and research tracks.
-- **Advanced discovery:** Search papers by ID, title, abstract, or keywords; combine searches with status and track filters.
-- **Authors:** Maintain author profiles, including affiliation, email, and ORCID-style demonstration identifiers.
-- **Peer reviews:** Create and manage scored reviews with comments, review dates, and associated papers.
-- **Track administration:** Manage research tracks, descriptions, and submission quotas; view assigned-paper counts and remaining capacity. Deletion of tracks with associated papers is blocked.
-- **Administrator access:** Password-only administrator login with ASP.NET Core cookie authentication, role-based authorization for `/Admin`, and a two-step logout confirmation.
-- **Personalization:** Switch between light and dark themes without restarting the application; the preference is saved in browser `localStorage`.
-- **Enhanced homepage:** University-inspired garnet styling, project introduction, and quick links to the primary workflows.
+#### 1. Research Paper Management (CRUD)
+- Create, read, update, and delete research paper submissions.
+- Manage paper titles, abstracts, keywords, submission dates, statuses, and research tracks.
+- View detailed information about individual research papers.
+- Associate papers with academic research tracks.
+
+#### 2. Author Management (CRUD)
+- Create, view, edit, and delete author profiles.
+- Maintain author information, including full name, email, academic affiliation, and ORCID ID.
+- Store author information independently from research papers.
+
+#### 3. Peer Review Management (CRUD)
+- Create, view, update, and delete peer reviews.
+- Associate reviews with research papers.
+- Record reviewer names, evaluation scores, comments, and review dates.
+
+#### 4. Advanced Research Paper Search
+- Search research papers by Paper ID, Title, Abstract, and Keywords.
+- Filter research papers by submission status and research track.
+- Combine search criteria to narrow results.
+- Implement database querying using Entity Framework Core.
+
+#### 5. Database and Data Layer
+- Implement a relational SQLite database containing five tables:
+  - Papers
+  - Authors
+  - Reviews
+  - Tracks
+  - PaperAuthors
+- Populate the database with 40 realistic demonstration records.
+- Configure primary keys, foreign keys, and entity relationships using Entity Framework Core.
+- Maintain a separate `Arbiter.Data` Class Library for database entities, DbContext, and migrations.
+- Provide verified `DDL.sql` and `DML.sql` scripts for database reconstruction.
+
+#### 6. Administration — Research Track Management
+- Provide a dedicated Administration section for managing research tracks.
+- Create, view, edit, and delete research tracks.
+- Manage track descriptions and maximum submission quotas.
+- Display assigned paper counts and available submission capacity.
+- Prevent deletion of research tracks containing associated papers.
+
+#### 7. User Settings and Theme Customization
+- Provide a dedicated Settings page.
+- Support Light and Dark themes using Bootstrap 5.3.
+- Allow users to switch themes instantly without restarting the application.
+- Preserve the selected theme across page navigation and browser sessions using `localStorage`.
+
+---
+
+### Additional Features — Beyond Assignment Requirements
+
+The following enhancements were implemented to improve Arbiter's functionality, usability, security, and overall presentation.
+
+#### 1. Administrator Authentication
+- Implement password-protected administrator access using ASP.NET Core cookie authentication.
+- Restrict access to Administration pages through role-based authorization.
+- Store the administrator password outside the source code using .NET User Secrets.
+- Provide a two-step logout process with confirmation.
+- Configure HTTPS support for secure local development.
+
+#### 2. Enhanced University-Inspired Homepage
+- Design a professional homepage for **Arbiter — University Research Publication & Peer-Review Hub**.
+- Incorporate University of South Carolina-inspired garnet, black, and white styling.
+- Include a welcome banner, project introduction, and interactive feature cards.
+- Provide quick navigation to research papers, paper submissions, authors, and peer reviews.
 
 ## Technology Stack
 
@@ -28,7 +85,7 @@ Arbiter is an ASP.NET Core Razor Pages web application for organizing university
 | Data access | Entity Framework Core 10 |
 | Database | SQLite |
 | Authentication | ASP.NET Core cookie authentication and authorization policies |
-| Development | .NET SDK 10, Visual Studio Code or Visual Studio, Git |
+| Development | .NET SDK 10, Visual Studio Code, Git |
 
 ## Architecture
 
@@ -78,79 +135,114 @@ The database contains five application tables:
 
 The demonstration dataset includes **40 records** across the five tables: 5 tracks, 8 authors, 10 papers, 10 paper–author associations, and 7 reviews. The SQLite DDL and DML scripts have been tested against a separate database, including a foreign-key integrity check.
 
-## Getting Started
+
+## Running the Application
+
+Arbiter is built using ASP.NET Core Razor Pages and .NET 10. It can be run on both **Windows** and **macOS** using Visual Studio, Visual Studio Code, or a terminal.
 
 ### Prerequisites
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
-- Git
-- A code editor such as Visual Studio Code or Visual Studio
-- Optional: `dotnet-ef` CLI for migration management and `sqlite3` for inspecting/exporting the database
+Before running Arbiter, make sure you have:
 
-### 1. Clone and build
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Git](https://git-scm.com/downloads)
+- A development environment:
+  - **Windows:** Visual Studio 2022 or newer with .NET 10 support, or Visual Studio Code
+  - **macOS:** Visual Studio Code
+- An internet connection for restoring NuGet dependencies
+
+> **Note:** SQLite and Entity Framework Core dependencies are managed through the project. You do not need to install a separate database server.
+
+### 1. Clone the Repository
+
+Open **PowerShell or Command Prompt (Windows)** or **Terminal (macOS)**.
+
+Run:
 
 ```bash
 git clone <YOUR-REPOSITORY-URL>
 cd Arbiter
+```
+
+Replace `<YOUR-REPOSITORY-URL>` with the GitHub repository URL.
+
+### 2. Restore and Build
+
+From the Arbiter project directory, run:
+
+```bash
 dotnet restore
 dotnet build
 ```
 
-Replace `<YOUR-REPOSITORY-URL>` with the repository's actual GitHub clone URL.
+This downloads the required NuGet packages and builds the application.
 
-### 2. Configure the database
+A successful build confirms that the project is ready to run.
 
-The application uses SQLite and EF Core migrations. Set `ConnectionStrings:DefaultConnection` in `src/Arbiter.Web/appsettings.json` or via environment-specific configuration to point to a writable SQLite database, for example:
+### 3. Configure the Administrator Password
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Data Source=Arbiter.db"
-  }
-}
-```
+Arbiter includes a password-protected Administration section.
 
-The startup initializer applies EF Core migrations and seeds demonstration records if they do not already exist. Avoid committing local database files containing personal or sensitive information.
-
-### 3. Configure the administrator password (development)
-
-From the repository root:
+Set up an administrator password using .NET User Secrets:
 
 ```bash
 dotnet user-secrets init --project src/Arbiter.Web
-dotnet user-secrets set "AdminAuth:Password" "<CHOOSE-A-STRONG-PASSWORD>" --project src/Arbiter.Web
+dotnet user-secrets set "AdminAuth:Password" "YourPasswordHere" --project src/Arbiter.Web
 ```
 
-Replace the placeholder with a strong password. **Never commit the password or share it in screenshots.** User Secrets are intended for local development, not production secret management.
+Replace `YourPasswordHere` with a password of your choice.
 
-### 4. Trust the local HTTPS certificate
+> **Security:** Never commit your administrator password to GitHub. .NET User Secrets stores development credentials outside the project directory.
+
+### 4. Enable HTTPS
+
+Trust the ASP.NET Core development certificate:
 
 ```bash
 dotnet dev-certs https --trust
 ```
 
-### 5. Run the application
+**Windows:** Approve the certificate trust prompt if displayed.
+
+**macOS:** Approve the certificate in your Keychain if prompted.
+
+This enables secure HTTPS connections for local development.
+
+### 5. Run Arbiter
+
+From the repository root, execute:
 
 ```bash
 dotnet run --project src/Arbiter.Web --launch-profile https
 ```
 
-With the provided development launch settings, visit **https://localhost:7234**. If your environment uses a different port, use the address printed in the terminal.
+Once the application starts, open your browser and navigate to:
 
-> **Note:** The included authentication flow is a classroom-oriented, single-administrator implementation. For deployment, add production-grade identity management, credential storage, login-attempt protection, secure HTTPS hosting, and authorization rules for other editing workflows.
+**https://localhost:7234**
 
-## Using Arbiter
+If the application uses a different port, use the HTTPS address displayed in your terminal.
 
-| Page | Purpose |
-| --- | --- |
-| `/` | Welcome page and feature navigation |
-| `/Papers` | Browse, search, filter, and manage research papers |
-| `/Authors` | View and manage researchers |
-| `/Reviews` | View and manage peer reviews |
-| `/Settings` | Switch between light and dark appearance |
-| `/AdminLogin` | Sign in as the administrator |
-| `/Admin/Tracks` | Protected research-track management |
-| `/AdminLogout` | Confirm administrator logout |
+### 6. Explore the Application
+
+After launching Arbiter, you can:
+
+- **Home:** Explore the university research hub.
+- **Papers:** Browse, search, create, edit, and delete research papers.
+- **Authors:** View and manage researcher profiles.
+- **Reviews:** Explore and manage peer reviews.
+- **Administration:** Sign in using the administrator password to manage research tracks.
+- **Settings:** Switch between Light and Dark themes.
+
+The application uses SQLite with Entity Framework Core migrations and automatically initializes its database with demonstration records when started.
+
+### Stopping the Application
+
+To stop Arbiter, return to the terminal and press:
+
+**Ctrl + C**
+
+The application can be restarted using the same `dotnet run` command.
+
 
 ## SQL Scripts
 
@@ -167,21 +259,6 @@ sqlite3 ArbiterRecreated.db "PRAGMA foreign_key_check;"
 
 An empty response from `PRAGMA foreign_key_check;` indicates no detected foreign-key violations. These standalone scripts intentionally omit EF Core's migration-history metadata; do not substitute the recreated test database for the application's migration-managed database without reconciling migration history.
 
-## Screenshots
-
-Add screenshots captured from the running application before final submission:
-
-| Screen | Screenshot |
-| --- | --- |
-| Enhanced homepage | _Add screenshot_ |
-| Paper search and filters | _Add screenshot_ |
-| Create, edit, and delete paper | _Add screenshots_ |
-| Author and review management | _Add screenshots_ |
-| Track administration | _Add screenshot_ |
-| Light and dark settings | _Add screenshots_ |
-
-For CSCE 547 submission, the required search, insert, update, and delete screenshots should also appear in the accompanying PDF or DOCX documentation.
-
 ## Project Scope and Future Improvements
 
 Arbiter demonstrates a functional academic research workflow, but it is not yet a production publication system. Possible next steps include:
@@ -193,8 +270,13 @@ Arbiter demonstrates a functional academic research workflow, but it is not yet 
 - Notifications and publication visibility rules.
 - Accessibility testing, automated tests, and deployment hardening.
 
-## Academic Context
+## Academic Project
 
 Developed for **CSCE 547 — Windows Programming**, Minor Project 3 (graduate-level requirements), using ASP.NET Core Razor Pages and a separate data class library.
 
 **Arbiter is an independent educational project inspired by the University of South Carolina research community; it is not affiliated with or endorsed by the university.**
+
+
+## Author
+
+Divyashanu Swain
