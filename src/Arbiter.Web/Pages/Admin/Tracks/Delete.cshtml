@@ -1,0 +1,64 @@
+@page "{id:int}"
+@model Arbiter.Web.Pages.Admin.Tracks.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Track";
+}
+
+<h1>Delete Track</h1>
+
+<h4>Are you sure you want to delete this track?</h4>
+
+<hr />
+
+<div asp-validation-summary="ModelOnly"
+        class="text-danger"></div>
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Track Name</th>
+        <td>@Model.Track?.Name</td>
+    </tr>
+
+    <tr>
+        <th>Description</th>
+        <td>@Model.Track?.Description</td>
+    </tr>
+
+    <tr>
+        <th>Maximum Quota</th>
+        <td>@Model.Track?.MaxQuota</td>
+    </tr>
+
+    <tr>
+        <th>Associated Papers</th>
+        <td>@Model.PaperCount</td>
+    </tr>
+
+</table>
+
+@if (Model.PaperCount > 0)
+{
+    <div class="alert alert-warning">
+        This track cannot be deleted because it contains
+        @Model.PaperCount associated paper(s).
+    </div>
+}
+
+<form method="post">
+
+    @if (Model.PaperCount == 0)
+    {
+        <button type="submit"
+                class="btn btn-danger">
+            Delete Track
+        </button>
+    }
+
+    <a asp-page="Index"
+        class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

@@ -1,0 +1,70 @@
+@page
+@model Arbiter.Web.Pages.Admin.Tracks.CreateModel
+
+@{
+    ViewData["Title"] = "Create Track";
+}
+
+<h1>Create Track</h1>
+
+<p class="text-muted">
+    Add a new research track to the conference.
+</p>
+
+<form method="post">
+
+    <div asp-validation-summary="ModelOnly"
+            class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Track.Name"
+                class="form-label"></label>
+
+        <input asp-for="Track.Name"
+                class="form-control" />
+
+        <span asp-validation-for="Track.Name"
+                class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Track.Description"
+                class="form-label"></label>
+
+        <textarea asp-for="Track.Description"
+                    class="form-control"
+                    rows="3"></textarea>
+
+        <span asp-validation-for="Track.Description"
+                class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Track.MaxQuota"
+                class="form-label"></label>
+
+        <input asp-for="Track.MaxQuota"
+                type="number"
+                min="1"
+                max="1000"
+                class="form-control" />
+
+        <span asp-validation-for="Track.MaxQuota"
+                class="text-danger"></span>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Create Track
+    </button>
+
+    <a asp-page="Index"
+        class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
